@@ -93,6 +93,7 @@ export function App() {
 
 | Guide | |
 | --- | --- |
+| **[Master plan (PLAN.md)](PLAN.md)** | Rencana produk & platform: anime-first di `anime.tsukimi.my`, subdomain per vertikal, backend, DR, Kubernetes, roadmap |
 | [Getting started](docs/getting-started.md) | Install, run, use in an app, Storybook toolbars |
 | [Architecture](docs/architecture.md) | Folder layout, StyleX conventions, adding a component |
 | [Components](docs/components.md) | Every component and its main props |

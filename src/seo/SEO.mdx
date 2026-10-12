@@ -1,0 +1,51 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="SEO/Guide" />
+
+# SEO
+
+Three layers, all in `src/seo/`:
+
+1. **`<Seo {...meta} />`** — put it inside any page. React 19 hoists `<title>`, `<meta>` and `<link>`
+   into `<head>`; JSON-LD is rendered as `<script type="application/ld+json">`.
+2. **Builders** — `websiteJsonLd`, `videoJsonLd`, `personJsonLd`, `comicSeriesJsonLd`,
+   `comicChapterJsonLd`, `breadcrumbJsonLd` produce schema.org objects for rich results
+   (video carousel, ratings, breadcrumbs, sitelinks search box).
+3. **`auditSeo(meta, { slug, h1Count })`** — returns a 0–100 score with pass / warn / fail checks.
+   **`<SeoOptimizer />`** is the editor UI on top of it (Google & social previews + HTML export).
+
+```tsx
+import { Seo, comicSeriesJsonLd } from '@tsukimi/ui';
+
+<Seo
+  title="Blue Sky Refrain Manga — Read Online"
+  description="Read Blue Sky Refrain manga online: 42 chapters…"
+  canonical="https://tsukimi.my/comics/blue-sky-refrain"
+  image="https://tsukimi.my/og/blue-sky-refrain.jpg"
+  imageWidth={1200}
+  imageHeight={630}
+  type="book"
+  jsonLd={[comicSeriesJsonLd({ /* … */ })]}
+/>
+```
+
+## Rules the audit checks
+
+| Check | Target |
+| --- | --- |
+| Title | 30–60 chars (with “ | Tsukimi” suffix) |
+| Description | 70–160 chars |
+| Focus keyword | in title (near the start), description and slug |
+| Slug | lowercase, hyphens, ≤ 75 chars |
+| Canonical | absolute `https://` URL |
+| Social image | 1200 × 630 + alt text (don't reuse the 250×351 poster) |
+| Structured data | at least one JSON-LD block |
+| hreflang | includes `x-default` |
+| Indexing | not `noindex` |
+| H1 | exactly one per page |
+
+## Reader pages
+
+For chapters, set the canonical to the chapter URL (not `?page=3`), and use
+`rel="prev"`/`next` links in your router for chapter navigation. Keep reader images
+`loading="lazy"` after the first 3 pages (already done in `ComicReader`).

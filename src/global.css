@@ -1,0 +1,19 @@
+*, *::before, *::after { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: 'Plus Jakarta Sans', 'Noto Sans JP', system-ui, sans-serif;
+  color: #1e293b;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ---------- device-level helpers ---------- */
+html { -webkit-text-size-adjust: 100%; }
+/* TV: big, high-contrast focus ring for D-pad navigation */
+html[data-device='tv'] :focus-visible {
+  outline: 4px solid #ec4899 !important;
+  outline-offset: 4px;
+  box-shadow: 0 0 0 8px rgba(236, 72, 153, 0.25) !important;
+}
+html[data-device='tv'] body { padding: 2.5vh 2.5vw; } /* overscan-safe area */
+/* respect iOS notch / home indicator */
+body { padding-bottom: env(safe-area-inset-bottom); }

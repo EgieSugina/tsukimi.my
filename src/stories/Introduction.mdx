@@ -1,0 +1,30 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Introduction" />
+
+# Tsukimi UI
+
+Reusable **React + StyleX** components for the web-stream UI, modelled on the
+reference web UI (Cast Roster / Guest List / Supplies screens) and the
+Figma file *Web Stream — UI Reference*.
+
+- **Tokens** live in `src/tokens/tokens.stylex.ts` (`colors`, `gradients`, `radius`, `space`, `fonts`, `shadows`, `media`).
+- **Every profile photo and video cover is 250 × 351** — use `MediaFrame` (pass `src`).
+- Every component accepts `xstyle` (a `stylex.create` style) to override styles from outside.
+
+| Group | Components |
+| --- | --- |
+| Foundations | Icon |
+| Components | Badge, Chip, Button, StatPill, NavTab, SearchField, FilterDropdown, CategoryTile, SectionHeader, ProgressBar, MediaFrame |
+| Cards | VideoPoster, VideoCard, CastPolaroid, CastRosterCard |
+| Layout | TopBar, Sidebar, AppShell |
+| Pages | Home, Video Library, Cast Directory, Categories |
+
+```tsx
+import * as stylex from '@stylexjs/stylex';
+import { VideoCard, colors } from '@tsukimi/ui';
+
+const s = stylex.create({ wide: { width: '100%', borderColor: colors.pink } });
+
+<VideoCard {...video} coverSrc={video.cover} xstyle={s.wide} />;
+```

@@ -1,0 +1,32 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Foundations/Motion" />
+
+# Motion
+
+Animations use **[Motion](https://motion.dev)** (`motion/react`, formerly Framer Motion).
+Shared presets live in `src/motion/motion.tsx` — use them instead of ad-hoc values so the UI feels consistent.
+
+| Preset | Use for |
+| --- | --- |
+| `spring.snappy` | buttons, chips, tabs, icons |
+| `spring.soft` | cards, panels, list items |
+| `spring.layout` | sliding "active" pills (`layoutId`) |
+| `press` / `lift` | hover + tap feedback for controls / cards |
+| `fadeUp`, `fade`, `pop` | enter / exit variants |
+| `staggerContainer(n)` | stagger children in |
+| `<Reveal>`, `<Stagger>`, `<StaggerItem>` | animate any block in on scroll |
+
+What animates where:
+
+- **Controls** — Button, Chip, CategoryTile, icon buttons: hover lift + tap squash.
+- **Tabs** — NavTab, ThemeToggle, Sidebar quick tabs, season tabs, reader & SEO tabs, card tabs: the active pill *slides* between items.
+- **Cards** — posters, video / comic / anime / cast cards fade-up when scrolled into view and lift on hover; the polaroid straightens its tilt on hover.
+- **Lists** — EpisodeList, ChapterList, AiringCalendar, SEO checklist: staggered entry, smooth re-ordering on filter/sort (`layout` + `AnimatePresence`).
+- **Calendar** — week navigation slides in the direction you move.
+- **Reader** — pages slide in the reading direction (right→left for manga), toolbars slide away, settings pop.
+- **Player** — controls fade, big play button pops, Skip Intro slides in, menus pop from the corner, next-episode countdown ticks.
+- **Data** — progress bars and the SEO score animate to their value.
+
+`<ThemeProvider>` wraps everything in `<MotionProvider>` (`reducedMotion="user"`), so users with
+**Reduce motion** enabled in their OS get instant transitions automatically.
